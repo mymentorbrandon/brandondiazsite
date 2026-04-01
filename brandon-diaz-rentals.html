@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Available Rentals | Brandon Diaz Properties</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Barlow+Condensed:wght@400;600;700;900&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --black: #0a0a0a;
+    --dark: #111111;
+    --card: #181818;
+    --card2: #1e1e1e;
+    --border: #2a2a2a;
+    --gold: #c9a84c;
+    --gold-light: #e8c96a;
+    --gold-dim: rgba(201,168,76,0.12);
+    --red: #c0392b;
+    --green: #27ae60;
+    --white: #f5f0e8;
+    --grey: #888;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-cond: 'Barlow Condensed', sans-serif;
+    --font-body: 'Barlow', sans-serif;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body { background:var(--black); color:var(--white); font-family:var(--font-body); overflow-x:hidden; }
+  ::-webkit-scrollbar { width:4px; }
+  ::-webkit-scrollbar-track { background:var(--black); }
+  ::-webkit-scrollbar-thumb { background:var(--gold); }
+
+  /* ── NAV ── */
+  nav {
+    position:fixed; top:0; left:0; right:0; z-index:1000;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 48px;
+    background:rgba(10,10,10,0.95);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav-logo { font-family:var(--font-display); font-size:26px; letter-spacing:3px; color:var(--gold); text-decoration:none; }
+  .nav-logo span { color:var(--white); }
+  .nav-back {
+    font-family:var(--font-cond); font-size:12px; font-weight:700;
+    letter-spacing:2px; text-transform:uppercase; color:var(--grey);
+    text-decoration:none; display:flex; align-items:center; gap:8px;
+    transition:color 0.2s;
+  }
+  .nav-back:hover { color:var(--gold); }
+  .nav-cta {
+    font-family:var(--font-cond); font-size:12px; font-weight:700;
+    letter-spacing:2px; text-transform:uppercase;
+    background:var(--gold); color:var(--black);
+    padding:10px 22px; text-decoration:none; transition:background 0.2s;
+  }
+  .nav-cta:hover { background:var(--gold-light); }
+
+  /* ── HERO ── */
+  .page-hero {
+    min-height:52vh; display:flex; align-items:flex-end;
+    padding:120px 48px 60px; position:relative; overflow:hidden;
+  }
+  .hero-bg-grid {
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
+    background-size:48px 48px;
+  }
+  .hero-bg-radial {
+    position:absolute; inset:0;
+    background:radial-gradient(ellipse at 60% 30%, rgba(201,168,76,0.09) 0%, transparent 55%),
+               radial-gradient(ellipse at 10% 90%, rgba(192,57,43,0.06) 0%, transparent 45%);
+  }
+  .hero-content { position:relative; z-index:1; max-width:900px; }
+  .hero-eyebrow {
+    font-family:var(--font-cond); font-size:11px; font-weight:700;
+    letter-spacing:4px; text-transform:uppercase; color:var(--gold);
+    display:flex; align-items:center; gap:10px; margin-bottom:14px;
+  }
+  .hero-eyebrow::before { content:''; display:block; width:32px; height:1px; background:var(--gold); }
+  .hero-title { font-family:var(--font-display); font-size:clamp(60px,8vw,110px); line-height:0.9; margin-bottom:20px; }
+  .hero-title .gold { color:var(--gold); }
+  .hero-desc { font-size:16px; font-weight:300; color:#aaa; line-height:1.7; max-width:560px; }
+
+  /* ── STATS BAR ── */
+  .stats-bar {
+    background:var(--card); border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+    display:flex; align-items:stretch;
+  }
+  .stat-item {
+    flex:1; padding:24px 32px; border-right:1px solid var(--border);
+    display:flex; align-items:center; gap:16px;
+  }
+  .stat-item:last-child { border-right:none; }
+  .stat-icon { font-size:24px; }
+  .stat-val { font-family:var(--font-display); font-size:32px; color:var(--gold); line-height:1; }
+  .stat-lbl { font-family:var(--font-cond); font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--grey); margin-top:2px; }
+
+  /* ── FILTERS ── */
+  .filters-bar {
+    padding:32px 48px; background:var(--dark);
+    border-bottom:1px solid var(--border);
+    display:flex; gap:16px; align-items:center; flex-wrap:wrap;
+  }
+  .filter-label { font-family:var(--font-cond); font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--grey); margin-right:4px; }
+  .filter-btn {
+    font-family:var(--font-cond); font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase;
+    padding:8px 18px; background:transparent; border:1px solid var(--border); color:var(--grey);
+    cursor:pointer; transition:all 0.2s;
+  }
+  .filter-btn:hover, .filter-btn.active { border-color:var(--gold); color:var(--gold); background:var(--gold-dim); }
+  .filter-select {
+    font-family:var(--font-cond); font-size:12px; font-weight:700; letter-spacing:1px;
+    background:var(--card); border:1px solid var(--border); color:var(--white);
+    padding:8px 14px; cursor:pointer; outline:none; appearance:none;
+    -webkit-appearance:none; padding-right:28px;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23888'/%3E%3C/svg%3E");
+    background-repeat:no-repeat; background-position:right 10px center;
+  }
+  .filter-search {
+    flex:1; min-width:200px; max-width:320px;
+    font-family:var(--font-body); font-size:13px; font-weight:300;
+    background:var(--card); border:1px solid var(--border); color:var(--white);
+    padding:8px 14px; outline:none; transition:border-color 0.2s;
+  }
+  .filter-search:focus { border-color:var(--gold); }
+  .filter-search::placeholder { color:var(--grey); }
+  .results-count {
+    margin-left:auto; font-family:var(--font-cond); font-size:12px;
+    font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--grey);
+  }
+  .results-count span { color:var(--gold); }
+
+  /* ── LISTINGS GRID ── */
+  .listings-wrapper { padding:48px; background:var(--black); }
+  .listings-grid {
+    display:grid; grid-template-columns:repeat(auto-fill, minmax(340px,1fr));
+    gap:24px;
+  }
+  .no-results {
+    grid-column:1/-1; text-align:center; padding:80px 0;
+    font-family:var(--font-cond); font-size:20px; font-weight:700;
+    letter-spacing:2px; text-transform:uppercase; color:var(--grey);
+  }
+
+  /* ── LISTING CARD ── */
+  .listing-card {
+    background:var(--card); border:1px solid var(--border);
+    overflow:hidden; position:relative;
+    transition:border-color 0.3s, transform 0.3s;
+    cursor:pointer;
+  }
+  .listing-card:hover { border-color:var(--gold); transform:translateY(-4px); }
+  .listing-card.unavailable { opacity:0.55; pointer-events:none; }
+
+  /* Photo area */
+  .listing-photo {
+    height:220px; position:relative; overflow:hidden;
+    background:linear-gradient(135deg,#1a1a1a,#222);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .listing-photo-emoji { font-size:64px; opacity:0.3; }
+  .listing-photo-overlay {
+    position:absolute; inset:0;
+    background:linear-gradient(to bottom, transparent 50%, rgba(10,10,10,0.9) 100%);
+  }
+  .listing-badges {
+    position:absolute; top:14px; left:14px;
+    display:flex; gap:8px; flex-wrap:wrap;
+  }
+  .badge {
+    font-family:var(--font-cond); font-size:10px; font-weight:700;
+    letter-spacing:2px; text-transform:uppercase; padding:5px 12px;
+  }
+  .badge-available { background:var(--green); color:#fff; }
+  .badge-coming { background:rgba(201,168,76,0.9); color:var(--black); }
+  .badge-rented  { background:rgba(150,150,150,0.9); color:#fff; }
+  .badge-new { background:var(--red); color:#fff; }
+  .badge-featured { background:var(--gold); color:var(--black); }
+
+  .listing-type-tag {
+    position:absolute; bottom:14px; right:14px;
+    font-family:var(--font-cond); font-size:10px; font-weight:700;
+    letter-spacing:2px; text-transform:uppercase;
+    background:rgba(10,10,10,0.85); color:var(--grey);
+    padding:4px 10px; border:1px solid var(--border);
+  }
+
+  /* Body */
+  .listing-body { padding:24px; }
+  .listing-price-row { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:6px; }
+  .listing-price { font-family:var(--font-display); font-size:36px; color:var(--gold); line-height:1; }
+  .listing-price-mo { font-family:var(--font-cond); font-size:13px; color:var(--grey); margin-left:4px; }
+  .listing-deposit { font-family:var(--font-cond); font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--grey); }
+  .listing-address { font-family:var(--font-cond); font-size:18px; font-weight:900; text-transform:uppercase; margin-bottom:4px; }
+  .listing-city { font-size:13px; color:var(--grey); font-weight:300; margin-bottom:16px; display:flex; align-items:center; gap:6px; }
+  .listing-city::before { content:'📍'; font-size:11px; }
+
+  /* Specs */
+  .listing-specs {
+    display:flex; gap:0; margin-bottom:16px;
+    border:1px solid var(--border);
+  }
+  .spec {
+    flex:1; padding:10px 8px; text-align:center;
+    border-right:1px solid var(--border);
+  }
+  .spec:last-child { border-right:none; }
+  .spec-val { font-family:var(--font-display); font-size:22px; color:var(--white); line-height:1; }
+  .spec-lbl { font-family:var(--font-cond); font-size:9px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--grey); margin-top:2px; }
+
+  /* Features */
+  .listing-features { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:20px; }
+  .feat-tag {
+    font-family:var(--font-cond); font-size:10px; font-weight:700;
+    letter-spacing:1px; text-transform:uppercase;
+    padding:4px 10px; border:1px solid var(--border); color:var(--grey);
+  }
+  .feat-tag.highlight { border-color:rgba(201,168,76,0.3); color:rgba(201,168,76,0.8); }
+
+  /* Available date */
+  .listing-avail {
+    font-family:var(--font-cond); font-size:12px; font-weight:700;
+    letter-spacing:1px; text-transform:uppercase;
+    display:flex; align-items:center; gap:8px; color:var(--grey);
+    padding-bottom:16px; border-bottom:1px solid var(--border); margin-bottom:16px;
+  }
+  .avail-dot { width:8px; height:8px; border-radius:50%; background:var(--green); flex-shrink:0; }
+  .avail-dot.soon { background:var(--gold); }
+  .avail-dot.taken { background:#666; }
+
+  /* CTA */
+  .listing-cta { display:flex; gap:10px; }
+  .btn-apply {
+    flex:1; font-family:var(--font-cond); font-size:12px; font-weight:700;
+    letter-spacing:2px; text-transform:uppercase;
+    background:var(--gold); color:var(--black);
+    border:none; padding:12px; cursor:pointer; transition:background 0.2s;
+  }
+  .btn-apply:hover { background:var(--gold-light); }
+  .btn-details {
+    font-family:var(--font-cond); font-size:12px; font-weight:700;
+    letter-spacing:2px; text-transform:uppercase;
+    background:transparent; color:var(--white);
+    border:1px solid var(--border); padding:12px 18px;
+    cursor:pointer; transition:all 0.2s;
+  }
+  .btn-details:hover { border-color:var(--gold); color:var(--gold); }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    position:fixed; inset:0; z-index:2000;
+    background:rgba(0,0,0,0.88); backdrop-filter:blur(6px);
+    display:none; align-items:center; justify-content:center;
+    padding:24px;
+  }
+  .modal-overlay.open { display:flex; }
+  .modal-box {
+    background:var(--card); border:1px solid var(--border);
+    max-width:820px; width:100%; max-height:90vh;
+    overflow-y:auto; position:relative;
+  }
+  .modal-box::before {
+    content:''; position:absolute; top:0; left:0; right:0;
+    height:3px; background:linear-gradient(90deg,var(--gold),var(--red));
+  }
+  .modal-header {
+    padding:32px 36px 24px; border-bottom:1px solid var(--border);
+    display:flex; justify-content:space-between; align-items:flex-start;
+  }
+  .modal-title { font-family:var(--font-display); font-size:42px; line-height:0.95; }
+  .modal-title .gold { color:var(--gold); }
+  .modal-close-btn {
+    background:none; border:1px solid var(--border); color:var(--grey);
+    width:36px; height:36px; cursor:pointer; font-size:16px;
+    flex-shrink:0; margin-top:4px; transition:all 0.2s;
+  }
+  .modal-close-btn:hover { border-color:var(--gold); color:var(--gold); }
+  .modal-body { padding:32px 36px; }
+  .modal-grid { display:grid; grid-template-columns:1fr 1fr; gap:32px; }
+  .modal-section-title {
+    font-family:var(--font-cond); font-size:12px; font-weight:700;
+    letter-spacing:3px; text-transform:uppercase; color:var(--gold);
+    margin-bottom:12px; display:flex; align-items:center; gap:10px;
+  }
+  .modal-section-title::after { content:''; flex:1; height:1px; background:var(--border); }
+  .modal-detail-list { list-style:none; }
+  .modal-detail-list li {
+    padding:10px 0; border-bottom:1px solid var(--border);
+    font-size:14px; font-weight:300; color:#bbb;
+    display:flex; justify-content:space-between;
+  }
+  .modal-detail-list li:last-child { border-bottom:none; }
+  .modal-detail-list li strong { color:var(--white); font-weight:600; }
+  .modal-desc { font-size:14px; font-weight:300; color:#999; line-height:1.8; margin-bottom:24px; }
+  .modal-features-grid { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:24px; }
+  .modal-feat {
+    font-family:var(--font-cond); font-size:11px; font-weight:700;
+    letter-spacing:1px; text-transform:uppercase; padding:6px 14px;
+    border:1px solid var(--border); color:var(--grey);
+  }
+  .modal-policy { font-size:13px; color:#888; line-height:1.7; font-weight:300; }
+
+  /* Application form */
+  .apply-form { padding:32px 36px; border-top:1px solid var(--border); }
+  .apply-title {
+    font-family:var(--font-display); font-size:28px; margin-bottom:6px;
+  }
+  .apply-sub { font-size:13px; color:var(--grey); font-weight:300; margin-bottom:24px; }
+  .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
+  .form-group { display:flex; flex-direction:column; gap:6px; }
+  .form-group.full { grid-column:1/-1; }
+  .form-label {
+    font-family:var(--font-cond); font-size:10px; font-weight:700;
+    letter-spacing:2px; text-transform:uppercase; color:var(--grey);
+  }
+  .form-input, .form-select, .form-textarea {
+    background:var(--black); border:1px solid var(--border);
+    color:var(--white); padding:10px 14px;
+    font-family:var(--font-body); font-size:13px; font-weight:300;
+    outline:none; transition:border-color 0.2s;
+  }
+  .form-input:focus, .form-select:focus, .form-textarea:focus { border-color:var(--gold); }
+  .form-input::placeholder, .form-textarea::placeholder { color:#555; }
+  .form-select { appearance:none; -webkit-appearance:none; cursor:pointer; }
+  .form-textarea { resize:vertical; min-height:80px; }
+  .form-submit {
+    font-family:var(--font-cond); font-size:13px; font-weight:700;
+    letter-spacing:2px; text-transform:uppercase;
+    background:var(--gold); color:var(--black);
+    border:none; padding:14px 40px; cursor:pointer; width:100%;
+    transition:background 0.2s; margin-top:8px;
+  }
+  .form-submit:hover { background:var(--gold-light); }
+  .form-note { font-size:11px; color:#555; text-align:center; margin-top:10px; font-weight:300; }
+  .form-success {
+    text-align:center; padding:32px;
+    font-family:var(--font-cond); font-size:18px; font-weight:700;
+    letter-spacing:2px; text-transform:uppercase; color:var(--gold);
+    display:none;
+  }
+
+  /* ── PROCESS SECTION ── */
+  .process-section {
+    padding:80px 48px; background:var(--dark);
+    border-top:1px solid var(--border);
+  }
+  .process-label {
+    font-family:var(--font-cond); font-size:11px; font-weight:700;
+    letter-spacing:4px; text-transform:uppercase; color:var(--gold);
+    display:flex; align-items:center; gap:12px; margin-bottom:12px;
+  }
+  .process-label::after { content:''; flex:1; height:1px; background:linear-gradient(90deg,var(--border),transparent); }
+  .process-title { font-family:var(--font-display); font-size:clamp(36px,4vw,56px); margin-bottom:48px; }
+  .process-title .gold { color:var(--gold); }
+  .process-steps { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:0; }
+  .process-step {
+    padding:36px 28px; border:1px solid var(--border); position:relative;
+    border-left:none; border-top:none;
+  }
+  .process-step:first-child { border-left:1px solid var(--border); }
+  .process-step:last-child {}
+  .step-num {
+    font-family:var(--font-display); font-size:64px;
+    color:rgba(201,168,76,0.08); line-height:1; margin-bottom:12px;
+  }
+  .step-icon { font-size:28px; margin-bottom:12px; }
+  .step-title {
+    font-family:var(--font-cond); font-size:18px; font-weight:900;
+    text-transform:uppercase; margin-bottom:8px;
+  }
+  .step-desc { font-size:13px; color:#888; line-height:1.7; font-weight:300; }
+
+  /* ── REQUIREMENTS ── */
+  .req-section { padding:80px 48px; background:var(--black); border-top:1px solid var(--border); }
+  .req-grid { display:grid; grid-template-columns:1fr 1fr; gap:48px; margin-top:48px; }
+  .req-card {
+    background:var(--card); border:1px solid var(--border); padding:36px;
+    position:relative; overflow:hidden;
+  }
+  .req-card::before {
+    content:''; position:absolute; top:0; left:0; right:0;
+    height:3px; background:linear-gradient(90deg,var(--gold),transparent);
+  }
+  .req-card-title {
+    font-family:var(--font-cond); font-size:20px; font-weight:900;
+    text-transform:uppercase; margin-bottom:20px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .req-list { list-style:none; }
+  .req-list li {
+    padding:10px 0; border-bottom:1px solid var(--border);
+    font-size:14px; color:#aaa; font-weight:300;
+    display:flex; gap:10px;
+  }
+  .req-list li:last-child { border-bottom:none; }
+  .req-list li::before { content:'▸'; color:var(--gold); font-size:11px; flex-shrink:0; margin-top:2px; }
+
+  /* ── FAQ ── */
+  .faq-section { padding:80px 48px; background:var(--dark); border-top:1px solid var(--border); }
+  .faq-list { max-width:760px; margin-top:48px; }
+  .faq-item {
+    border-bottom:1px solid var(--border); overflow:hidden;
+  }
+  .faq-q {
+    width:100%; background:none; border:none; color:var(--white);
+    font-family:var(--font-cond); font-size:17px; font-weight:700;
+    text-transform:uppercase; letter-spacing:1px;
+    padding:20px 0; text-align:left; cursor:pointer;
+    display:flex; justify-content:space-between; align-items:center;
+    transition:color 0.2s;
+  }
+  .faq-q:hover { color:var(--gold); }
+  .faq-q .arrow { font-size:18px; transition:transform 0.3s; color:var(--gold); }
+  .faq-q.open .arrow { transform:rotate(45deg); }
+  .faq-a {
+    font-size:14px; color:#888; font-weight:300; line-height:1.8;
+    max-height:0; overflow:hidden; transition:max-height 0.4s ease, padding 0.3s;
+  }
+  .faq-a.open { max-height:300px; padding-bottom:20px; }
+
+  /* ── CTA BAND ── */
+  .cta-band {
+    padding:72px 48px; text-align:center;
+    background:linear-gradient(135deg,rgba(201,168,76,0.07),rgba(192,57,43,0.04));
+    border-top:1px solid var(--border);
+  }
+  .cta-band-title { font-family:var(--font-display); font-size:clamp(36px,4vw,60px); margin-bottom:12px; }
+  .cta-band-sub { font-size:15px; color:#888; font-weight:300; max-width:480px; margin:0 auto 32px; line-height:1.7; }
+  .cta-band-btns { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
+  .btn-gold {
+    font-family:var(--font-cond); font-size:13px; font-weight:700; letter-spacing:2px;
+    text-transform:uppercase; background:var(--gold); color:var(--black);
+    border:none; padding:14px 36px; cursor:pointer; text-decoration:none;
+    display:inline-block; transition:all 0.2s;
+  }
+  .btn-gold:hover { background:var(--gold-light); transform:translateY(-2px); }
+  .btn-outline-gold {
+    font-family:var(--font-cond); font-size:13px; font-weight:700; letter-spacing:2px;
+    text-transform:uppercase; background:transparent; color:var(--white);
+    border:1px solid var(--border); padding:14px 36px; cursor:pointer;
+    text-decoration:none; display:inline-block; transition:all 0.2s;
+  }
+  .btn-outline-gold:hover { border-color:var(--gold); color:var(--gold); }
+
+  /* ── FOOTER STRIP ── */
+  .footer-strip {
+    background:var(--card); border-top:1px solid var(--border);
+    padding:24px 48px; display:flex; justify-content:space-between; align-items:center;
+  }
+  .footer-strip-logo { font-family:var(--font-display); font-size:20px; color:var(--gold); letter-spacing:2px; text-decoration:none; }
+  .footer-strip-logo span { color:var(--white); }
+  .footer-strip-copy { font-size:12px; color:#555; font-weight:300; }
+
+  /* ── ANIMATIONS ── */
+  .fade-up { opacity:0; transform:translateY(24px); transition:opacity 0.5s, transform 0.5s; }
+  .fade-up.visible { opacity:1; transform:translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:900px){
+    nav { padding:16px 20px; }
+    .page-hero { padding:100px 24px 48px; }
+    .stats-bar { flex-wrap:wrap; }
+    .stat-item { min-width:50%; border-bottom:1px solid var(--border); }
+    .filters-bar { padding:20px 24px; }
+    .listings-wrapper { padding:24px; }
+    .listings-grid { grid-template-columns:1fr; }
+    .modal-grid { grid-template-columns:1fr; }
+    .modal-header, .modal-body, .apply-form { padding:24px; }
+    .form-grid { grid-template-columns:1fr; }
+    .process-section, .req-section, .faq-section, .cta-band { padding:60px 24px; }
+    .req-grid { grid-template-columns:1fr; }
+    .process-steps { grid-template-columns:1fr 1fr; }
+    .footer-strip { flex-direction:column; gap:8px; text-align:center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="brandon-diaz-hub.html" class="nav-logo">BRANDON<span>DIAZ</span></a>
+  <a href="brandon-diaz-hub.html" class="nav-back">← Back to Main Site</a>
+  <a href="#listings" class="nav-cta">View Rentals</a>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-bg-radial"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">BD Properties</div>
+    <h1 class="hero-title">AVAILABLE<br/><span class="gold">RENTALS</span></h1>
+    <p class="hero-desc">Quality homes managed with integrity. Every BD property is maintained to a high standard — because your home matters. Browse what's available and apply today.</p>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-icon">🏠</div>
+    <div>
+      <div class="stat-val" id="stat-available">0</div>
+      <div class="stat-lbl">Available Now</div>
+    </div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-icon">📅</div>
+    <div>
+      <div class="stat-val" id="stat-coming">0</div>
+      <div class="stat-lbl">Coming Soon</div>
+    </div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-icon">⚡</div>
+    <div>
+      <div class="stat-val">24hr</div>
+      <div class="stat-lbl">Response Time</div>
+    </div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-icon">⭐</div>
+    <div>
+      <div class="stat-val">4.9</div>
+      <div class="stat-lbl">Tenant Rating</div>
+    </div>
+  </div>
+</div>
+
+<!-- FILTERS -->
+<div class="filters-bar">
+  <span class="filter-label">Filter:</span>
+  <button class="filter-btn active" data-filter="all" onclick="setFilter(this,'all')">All</button>
+  <button class="filter-btn" data-filter="available" onclick="setFilter(this,'available')">Available Now</button>
+  <button class="filter-btn" data-filter="coming" onclick="setFilter(this,'coming')">Coming Soon</button>
+  <select class="filter-select" onchange="setType(this.value)">
+    <option value="all">All Types</option>
+    <option value="Single Family">Single Family</option>
+    <option value="Multi-Family">Multi-Family</option>
+    <option value="Apartment">Apartment</option>
+    <option value="Townhome">Townhome</option>
+  </select>
+  <select class="filter-select" onchange="setBeds(this.value)">
+    <option value="all">Any Beds</option>
+    <option value="1">1 Bed</option>
+    <option value="2">2 Beds</option>
+    <option value="3">3 Beds</option>
+    <option value="4">4+ Beds</option>
+  </select>
+  <input class="filter-search" type="text" id="search-input" placeholder="🔍  Search by address or city..." oninput="setSearch(this.value)"/>
+  <span class="results-count"><span id="result-count">0</span> Properties</span>
+</div>
+
+<!-- LISTINGS -->
+<div class="listings-wrapper" id="listings">
+  <div class="listings-grid" id="listings-grid">
+    <!-- Injected by JS -->
+  </div>
+</div>
+
+<!-- RENTAL PROCESS -->
+<div class="process-section">
+  <div class="process-label">Simple & Transparent</div>
+  <h2 class="process-title">HOW TO <span class="gold">APPLY</span></h2>
+  <div class="process-steps">
+    <div class="process-step fade-up">
+      <div class="step-num">01</div>
+      <div class="step-icon">🔍</div>
+      <h3 class="step-title">Browse Listings</h3>
+      <p class="step-desc">Find a property that fits your needs. Filter by size, price, and availability. Click "View Details" to see everything.</p>
+    </div>
+    <div class="process-step fade-up">
+      <div class="step-num">02</div>
+      <div class="step-icon">📋</div>
+      <h3 class="step-title">Submit Application</h3>
+      <p class="step-desc">Fill out the online application directly on the listing. Takes about 5 minutes. No application fee until approval.</p>
+    </div>
+    <div class="process-step fade-up">
+      <div class="step-num">03</div>
+      <div class="step-icon">✅</div>
+      <h3 class="step-title">Get Screened</h3>
+      <p class="step-desc">We review your credit, income, and rental history. We respond within 24–48 hours. Fair and consistent for all applicants.</p>
+    </div>
+    <div class="process-step fade-up">
+      <div class="step-num">04</div>
+      <div class="step-icon">🔑</div>
+      <h3 class="step-title">Sign & Move In</h3>
+      <p class="step-desc">Approved? Sign your lease, submit your deposit, and get your keys. We make move-in as smooth as possible.</p>
+    </div>
+  </div>
+</div>
+
+<!-- REQUIREMENTS -->
+<div class="req-section">
+  <div style="font-family:var(--font-cond);font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+    Tenant Criteria
+    <span style="flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent);display:block;"></span>
+  </div>
+  <h2 style="font-family:var(--font-display);font-size:clamp(36px,4vw,56px);margin-bottom:8px;">WHAT WE <span style="color:var(--gold);">REQUIRE</span></h2>
+  <p style="font-size:14px;color:#888;font-weight:300;max-width:560px;margin-bottom:0;">We hold every applicant to the same consistent standard. This protects both you and the property.</p>
+  <div class="req-grid">
+    <div class="req-card fade-up">
+      <div class="req-card-title">📊 Financial Requirements</div>
+      <ul class="req-list">
+        <li>Minimum credit score of 600</li>
+        <li>Gross monthly income = 3× the monthly rent</li>
+        <li>No open evictions in the last 5 years</li>
+        <li>No collections from previous landlords</li>
+        <li>Verifiable income (pay stubs, bank statements, or tax returns)</li>
+        <li>First month + security deposit required at signing</li>
+      </ul>
+    </div>
+    <div class="req-card fade-up">
+      <div class="req-card-title">📝 Rental History & Other</div>
+      <ul class="req-list">
+        <li>Positive rental references from prior landlords</li>
+        <li>Valid government-issued photo ID required</li>
+        <li>Background check (criminal history reviewed case by case)</li>
+        <li>Pet policy varies by property — listed on each unit</li>
+        <li>Smoking is not permitted in any BD property</li>
+        <li>All adults (18+) must apply and be on the lease</li>
+      </ul>
+    </div>
+  </div>
+  <p style="margin-top:24px;font-size:12px;color:#555;font-weight:300;">All screening is conducted in compliance with the Fair Housing Act. We do not discriminate based on race, color, religion, national origin, sex, familial status, or disability.</p>
+</div>
+
+<!-- FAQ -->
+<div class="faq-section">
+  <div style="font-family:var(--font-cond);font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+    Common Questions
+    <span style="flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent);display:block;"></span>
+  </div>
+  <h2 style="font-family:var(--font-display);font-size:clamp(36px,4vw,56px);">TENANT <span style="color:var(--gold);">FAQ</span></h2>
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">How long does the application process take? <span class="arrow">+</span></button>
+      <div class="faq-a">We typically respond within 24–48 business hours after receiving a complete application. If we need additional documentation, we'll reach out directly. The full process from application to lease signing usually takes 3–5 business days.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Is there an application fee? <span class="arrow">+</span></button>
+      <div class="faq-a">Yes, there is a small application fee to cover the cost of credit and background checks. This fee is non-refundable but is only charged once your application is reviewed. The fee amount is listed on each individual property listing.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Are utilities included in the rent? <span class="arrow">+</span></button>
+      <div class="faq-a">Utility inclusion varies by property. Each listing clearly states what is included — water, trash, lawn care, etc. Electricity and gas are typically tenant responsibility unless otherwise noted. We're always transparent about the full cost before you sign.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Can I have a co-signer? <span class="arrow">+</span></button>
+      <div class="faq-a">Yes, co-signers are accepted in some cases where the primary applicant doesn't fully meet income or credit requirements. The co-signer must meet our income and credit standards independently and will need to submit their own application and be listed on the lease.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">How do I report a maintenance issue? <span class="arrow">+</span></button>
+      <div class="faq-a">All BD tenants have access to our online maintenance portal where you can submit requests 24/7. Urgent issues (no heat, water leaks, lockouts) are handled same-day. Standard maintenance requests are addressed within 2–5 business days. We take care of our properties and our tenants.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">What is your pet policy? <span class="arrow">+</span></button>
+      <div class="faq-a">Pet policies are listed on each individual property. Some properties allow small dogs or cats with an additional pet deposit. No aggressive breeds per our insurance policy. All pets must be disclosed upfront — undisclosed pets are grounds for lease termination.</div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+  <h2 class="cta-band-title">DON'T SEE WHAT <span style="color:var(--gold)">YOU NEED?</span></h2>
+  <p class="cta-band-sub">New units come available regularly. Join the waitlist and be the first to know when something that fits you opens up.</p>
+  <div class="cta-band-btns">
+    <a href="#" class="btn-gold" onclick="openWaitlist()">Join the Waitlist</a>
+    <a href="brandon-diaz-hub.html#consulting" class="btn-outline-gold">Talk to Brandon</a>
+  </div>
+</div>
+
+<!-- FOOTER STRIP -->
+<div class="footer-strip">
+  <a href="brandon-diaz-hub.html" class="footer-strip-logo">BRANDON<span>DIAZ</span></a>
+  <span class="footer-strip-copy">© 2025 Brandon Diaz Properties. All rights reserved. Fair Housing Provider.</span>
+</div>
+
+<!-- PROPERTY DETAIL MODAL -->
+<div class="modal-overlay" id="detail-modal" onclick="closeModalOutside(event)">
+  <div class="modal-box" id="modal-content">
+    <!-- injected by JS -->
+  </div>
+</div>
+
+<!-- WAITLIST MODAL -->
+<div class="modal-overlay" id="waitlist-modal" onclick="closeWaitlistOutside(event)">
+  <div class="modal-box" style="max-width:480px;">
+    <div class="modal-header">
+      <div>
+        <h2 class="modal-title">JOIN THE<br/><span class="gold">WAITLIST</span></h2>
+        <p style="font-size:13px;color:#888;font-weight:300;margin-top:8px;">Be first when a new unit opens.</p>
+      </div>
+      <button class="modal-close-btn" onclick="closeWaitlist()">✕</button>
+    </div>
+    <div class="apply-form">
+      <div class="form-grid">
+        <div class="form-group"><label class="form-label">First Name</label><input class="form-input" type="text" placeholder="Brandon"/></div>
+        <div class="form-group"><label class="form-label">Last Name</label><input class="form-input" type="text" placeholder="Diaz"/></div>
+        <div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" placeholder="your@email.com"/></div>
+        <div class="form-group"><label class="form-label">Phone</label><input class="form-input" type="tel" placeholder="(555) 000-0000"/></div>
+        <div class="form-group"><label class="form-label">Beds Needed</label>
+          <select class="form-select"><option>1 Bedroom</option><option>2 Bedrooms</option><option>3 Bedrooms</option><option>4+ Bedrooms</option></select>
+        </div>
+        <div class="form-group"><label class="form-label">Max Budget / mo</label><input class="form-input" type="text" placeholder="$1,500"/></div>
+        <div class="form-group full"><label class="form-label">Anything else we should know?</label><textarea class="form-textarea" placeholder="Move-in timeline, preferred area, etc."></textarea></div>
+      </div>
+      <button class="form-submit" onclick="submitWaitlist()">Join Waitlist</button>
+      <p class="form-note">We'll reach out as soon as something matching your needs opens up.</p>
+      <div id="waitlist-success" class="form-success">✓ You're on the list! We'll be in touch.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── PROPERTY DATA ───────────────────────────────────────────────
+const properties = [
+  {
+    id: 1,
+    address: "412 Maple Ridge Dr",
+    city: "Chicago, IL 60614",
+    type: "Single Family",
+    status: "available",
+    price: 1850,
+    deposit: 1850,
+    beds: 3, baths: 2, sqft: 1340,
+    available: "Available Now",
+    availColor: "green",
+    features: ["Central A/C","In-Unit Laundry","Garage","Backyard","Updated Kitchen","Pet Friendly"],
+    highlight: ["In-Unit Laundry","Garage"],
+    badges: ["available","featured"],
+    appFee: 50,
+    leaseTerm: "12 months",
+    petPolicy: "Cats & small dogs allowed — $300 pet deposit",
+    parking: "1-car garage included",
+    utilities: "Tenant pays electric & gas. Water/trash included.",
+    description: "A beautifully maintained single-family home in a quiet neighborhood. Features an updated kitchen with stainless appliances, open living area, and a spacious backyard perfect for families. LVP flooring throughout, fresh paint, and move-in ready.",
+    emoji: "🏡",
+    smokePolicy: "No smoking on premises"
+  },
+  {
+    id: 2,
+    address: "889 Westfield Ave, Unit 2",
+    city: "Schaumburg, IL 60193",
+    type: "Apartment",
+    status: "available",
+    price: 1200,
+    deposit: 1200,
+    beds: 2, baths: 1, sqft: 920,
+    available: "Available Now",
+    availColor: "green",
+    features: ["A/C","On-Site Laundry","Off-Street Parking","Updated Bath","New Appliances"],
+    highlight: ["New Appliances"],
+    badges: ["available","new"],
+    appFee: 45,
+    leaseTerm: "12 months",
+    petPolicy: "No pets — sorry!",
+    parking: "1 off-street spot included",
+    utilities: "Tenant pays all utilities",
+    description: "Clean, bright 2-bed apartment on the second floor of a well-kept building. Recently updated bathroom and brand-new appliances. Quiet building, great neighbors, close to public transit and shopping.",
+    emoji: "🏢",
+    smokePolicy: "No smoking on premises"
+  },
+  {
+    id: 3,
+    address: "2201 Lakeview Blvd",
+    city: "Hanover Park, IL 60133",
+    type: "Single Family",
+    status: "available",
+    price: 2100,
+    deposit: 2100,
+    beds: 4, baths: 2.5, sqft: 1820,
+    available: "Available Now",
+    availColor: "green",
+    features: ["Central A/C","In-Unit Laundry","2-Car Garage","Finished Basement","Large Backyard","Pet Friendly"],
+    highlight: ["2-Car Garage","Finished Basement"],
+    badges: ["available","featured"],
+    appFee: 50,
+    leaseTerm: "12–24 months",
+    petPolicy: "Dogs & cats allowed — $400 pet deposit per pet",
+    parking: "2-car attached garage",
+    utilities: "Tenant pays electric, gas. Water/trash included.",
+    description: "Spacious 4-bed family home with a finished basement and large fenced backyard. Open floor plan, updated kitchen, and 2.5 bathrooms make this a rare find at this price point. Garage fits 2 full-size vehicles.",
+    emoji: "🏠",
+    smokePolicy: "No smoking on premises"
+  },
+  {
+    id: 4,
+    address: "5530 Oak Street, Unit 1A",
+    city: "Elgin, IL 60120",
+    type: "Multi-Family",
+    status: "coming",
+    price: 995,
+    deposit: 995,
+    beds: 1, baths: 1, sqft: 680,
+    available: "Available May 1st",
+    availColor: "soon",
+    features: ["A/C","Street Parking","Updated Kitchen","Hardwood Floors"],
+    highlight: ["Hardwood Floors"],
+    badges: ["coming"],
+    appFee: 40,
+    leaseTerm: "12 months",
+    petPolicy: "No pets",
+    parking: "Street parking only",
+    utilities: "Water/trash included. Tenant pays electric/gas.",
+    description: "Cozy and affordable 1-bedroom unit in a 4-unit building. Hardwood floors, updated kitchen, and great natural light. Ideal for a single professional or couple. Currently undergoing light renovation — will be move-in ready May 1st.",
+    emoji: "🏘️",
+    smokePolicy: "No smoking on premises"
+  },
+  {
+    id: 5,
+    address: "730 Pinecrest Rd",
+    city: "Bartlett, IL 60103",
+    type: "Townhome",
+    status: "coming",
+    price: 1650,
+    deposit: 1650,
+    beds: 3, baths: 1.5, sqft: 1250,
+    available: "Available June 1st",
+    availColor: "soon",
+    features: ["Central A/C","In-Unit Laundry","Attached Garage","Patio","New Flooring"],
+    highlight: ["In-Unit Laundry","Attached Garage"],
+    badges: ["coming"],
+    appFee: 50,
+    leaseTerm: "12 months",
+    petPolicy: "1 small dog or cat with $350 deposit",
+    parking: "1-car attached garage + driveway",
+    utilities: "Tenant pays all utilities",
+    description: "Modern townhome end-unit with an attached garage and private patio. Brand new LVP flooring throughout. In-unit laundry is a game changer. Great school district and quiet, safe neighborhood.",
+    emoji: "🏚️",
+    smokePolicy: "No smoking on premises"
+  },
+  {
+    id: 6,
+    address: "1100 Rosewood Ct, Unit 3",
+    city: "Carol Stream, IL 60188",
+    type: "Apartment",
+    status: "rented",
+    price: 1100,
+    deposit: 1100,
+    beds: 2, baths: 1, sqft: 850,
+    available: "Currently Rented",
+    availColor: "taken",
+    features: ["A/C","On-Site Laundry","Off-Street Parking"],
+    highlight: [],
+    badges: ["rented"],
+    appFee: 45,
+    leaseTerm: "12 months",
+    petPolicy: "No pets",
+    parking: "1 off-street spot",
+    utilities: "Water included. Tenant pays electric/gas.",
+    description: "Well-maintained 2-bedroom apartment. Currently occupied. Join the waitlist to be notified when this unit becomes available.",
+    emoji: "🏢",
+    smokePolicy: "No smoking on premises"
+  }
+];
+
+// ─── STATE ───────────────────────────────────────────────────────
+let activeFilter = 'all';
+let activeType = 'all';
+let activeBeds = 'all';
+let activeSearch = '';
+
+// ─── FILTER LOGIC ────────────────────────────────────────────────
+function setFilter(btn, val) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  activeFilter = val;
+  render();
+}
+function setType(val) { activeType = val; render(); }
+function setBeds(val) { activeBeds = val; render(); }
+function setSearch(val) { activeSearch = val.toLowerCase(); render(); }
+
+function filtered() {
+  return properties.filter(p => {
+    if (activeFilter !== 'all' && p.status !== activeFilter) return false;
+    if (activeType !== 'all' && p.type !== activeType) return false;
+    if (activeBeds !== 'all') {
+      if (activeBeds === '4' && p.beds < 4) return false;
+      if (activeBeds !== '4' && p.beds !== parseInt(activeBeds)) return false;
+    }
+    if (activeSearch && !p.address.toLowerCase().includes(activeSearch) && !p.city.toLowerCase().includes(activeSearch)) return false;
+    return true;
+  });
+}
+
+// ─── BADGE HTML ──────────────────────────────────────────────────
+function badgeHtml(badges) {
+  return badges.map(b => {
+    if (b === 'available') return '<span class="badge badge-available">Available Now</span>';
+    if (b === 'coming')    return '<span class="badge badge-coming">Coming Soon</span>';
+    if (b === 'rented')    return '<span class="badge badge-rented">Rented</span>';
+    if (b === 'new')       return '<span class="badge badge-new">New</span>';
+    if (b === 'featured')  return '<span class="badge badge-featured">Featured</span>';
+    return '';
+  }).join('');
+}
+
+// ─── RENDER LISTINGS ─────────────────────────────────────────────
+function render() {
+  const list = filtered();
+  const grid = document.getElementById('listings-grid');
+  document.getElementById('result-count').textContent = list.length;
+
+  // update stats
+  const av = properties.filter(p=>p.status==='available').length;
+  const cm = properties.filter(p=>p.status==='coming').length;
+  document.getElementById('stat-available').textContent = av;
+  document.getElementById('stat-coming').textContent = cm;
+
+  if (!list.length) {
+    grid.innerHTML = '<div class="no-results">No properties match your search.<br/><small style="font-size:13px;color:#555;margin-top:8px;display:block;text-transform:none;letter-spacing:0;font-weight:300;">Try adjusting your filters or join the waitlist.</small></div>';
+    return;
+  }
+
+  grid.innerHTML = list.map(p => `
+    <div class="listing-card ${p.status === 'rented' ? 'unavailable' : ''} fade-up" onclick="openModal(${p.id})">
+      <div class="listing-photo">
+        <div class="listing-photo-emoji">${p.emoji}</div>
+        <div class="listing-photo-overlay"></div>
+        <div class="listing-badges">${badgeHtml(p.badges)}</div>
+        <span class="listing-type-tag">${p.type}</span>
+      </div>
+      <div class="listing-body">
+        <div class="listing-price-row">
+          <div><span class="listing-price">$${p.price.toLocaleString()}</span><span class="listing-price-mo">/mo</span></div>
+          <span class="listing-deposit">Dep: $${p.deposit.toLocaleString()}</span>
+        </div>
+        <div class="listing-address">${p.address}</div>
+        <div class="listing-city">${p.city}</div>
+        <div class="listing-specs">
+          <div class="spec"><div class="spec-val">${p.beds}</div><div class="spec-lbl">Beds</div></div>
+          <div class="spec"><div class="spec-val">${p.baths}</div><div class="spec-lbl">Baths</div></div>
+          <div class="spec"><div class="spec-val">${p.sqft.toLocaleString()}</div><div class="spec-lbl">Sq Ft</div></div>
+        </div>
+        <div class="listing-features">
+          ${p.features.slice(0,4).map(f => `<span class="feat-tag ${p.highlight.includes(f)?'highlight':''}">${f}</span>`).join('')}
+          ${p.features.length > 4 ? `<span class="feat-tag">+${p.features.length-4} more</span>` : ''}
+        </div>
+        <div class="listing-avail">
+          <span class="avail-dot ${p.availColor}"></span>
+          ${p.available}
+        </div>
+        <div class="listing-cta">
+          ${p.status !== 'rented'
+            ? `<button class="btn-apply" onclick="event.stopPropagation();openModal(${p.id},true)">Apply Now</button>`
+            : `<button class="btn-apply" style="background:var(--border);color:var(--grey);cursor:default;" disabled>Rented</button>`}
+          <button class="btn-details" onclick="event.stopPropagation();openModal(${p.id})">Details</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  // re-observe new fade elements
+  document.querySelectorAll('.fade-up:not(.visible)').forEach(el => observer.observe(el));
+}
+
+// ─── MODAL ───────────────────────────────────────────────────────
+function openModal(id, jumpToApply = false) {
+  const p = properties.find(x => x.id === id);
+  if (!p) return;
+  const box = document.getElementById('modal-content');
+  box.innerHTML = `
+    <div class="modal-header">
+      <div>
+        <div style="font-family:var(--font-cond);font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">${p.type} · ${p.city}</div>
+        <h2 class="modal-title">${p.address.split(',')[0]}<br/><span class="gold">$${p.price.toLocaleString()}<small style="font-size:28px;color:var(--grey)">/mo</small></span></h2>
+      </div>
+      <button class="modal-close-btn" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;">${badgeHtml(p.badges)}</div>
+      <p class="modal-desc">${p.description}</p>
+
+      <div class="modal-section-title">Property Details</div>
+      <div class="modal-grid">
+        <ul class="modal-detail-list">
+          <li><span>Bedrooms</span><strong>${p.beds} Bed${p.beds>1?'s':''}</strong></li>
+          <li><span>Bathrooms</span><strong>${p.baths} Bath${p.baths>1?'s':''}</strong></li>
+          <li><span>Square Feet</span><strong>${p.sqft.toLocaleString()} sq ft</strong></li>
+          <li><span>Property Type</span><strong>${p.type}</strong></li>
+          <li><span>Lease Term</span><strong>${p.leaseTerm}</strong></li>
+          <li><span>Available</span><strong>${p.available}</strong></li>
+        </ul>
+        <ul class="modal-detail-list">
+          <li><span>Monthly Rent</span><strong>$${p.price.toLocaleString()}</strong></li>
+          <li><span>Security Deposit</span><strong>$${p.deposit.toLocaleString()}</strong></li>
+          <li><span>App Fee</span><strong>$${p.appFee}</strong></li>
+          <li><span>Parking</span><strong>${p.parking}</strong></li>
+          <li><span>Pets</span><strong>${p.petPolicy}</strong></li>
+          <li><span>Smoking</span><strong>${p.smokePolicy}</strong></li>
+        </ul>
+      </div>
+
+      <div class="modal-section-title" style="margin-top:24px;">Utilities</div>
+      <p class="modal-policy">${p.utilities}</p>
+
+      <div class="modal-section-title" style="margin-top:24px;">Features & Amenities</div>
+      <div class="modal-features-grid">${p.features.map(f=>`<span class="modal-feat">${f}</span>`).join('')}</div>
+    </div>
+
+    ${p.status !== 'rented' ? `
+    <div class="apply-form" id="apply-section">
+      <h3 class="apply-title">APPLY FOR<br/><span style="color:var(--gold)">${p.address.split(',')[0]}</span></h3>
+      <p class="apply-sub">Fill out the form below and we'll get back to you within 24–48 hours.</p>
+      <div id="apply-form-inner">
+        <div class="form-grid">
+          <div class="form-group"><label class="form-label">First Name *</label><input class="form-input" type="text" placeholder="John" required/></div>
+          <div class="form-group"><label class="form-label">Last Name *</label><input class="form-input" type="text" placeholder="Smith" required/></div>
+          <div class="form-group"><label class="form-label">Email Address *</label><input class="form-input" type="email" placeholder="john@email.com" required/></div>
+          <div class="form-group"><label class="form-label">Phone Number *</label><input class="form-input" type="tel" placeholder="(555) 000-0000" required/></div>
+          <div class="form-group"><label class="form-label">Current Address</label><input class="form-input" type="text" placeholder="123 Main St, City, IL"/></div>
+          <div class="form-group"><label class="form-label">Move-In Date *</label><input class="form-input" type="date" required/></div>
+          <div class="form-group"><label class="form-label">Monthly Income *</label><input class="form-input" type="text" placeholder="$5,000" required/></div>
+          <div class="form-group"><label class="form-label">Employer / Income Source</label><input class="form-input" type="text" placeholder="Company Name or Self-Employed"/></div>
+          <div class="form-group"><label class="form-label">Number of Occupants</label><select class="form-select"><option>1</option><option>2</option><option>3</option><option>4</option><option>5+</option></select></div>
+          <div class="form-group"><label class="form-label">Do You Have Pets?</label><select class="form-select"><option>No pets</option><option>1 cat</option><option>1 small dog</option><option>Multiple pets</option></select></div>
+          <div class="form-group full"><label class="form-label">Tell Us About Yourself</label><textarea class="form-textarea" placeholder="Brief intro — current living situation, why you're moving, references available, etc."></textarea></div>
+        </div>
+        <button class="form-submit" onclick="submitApplication('${p.address}')">Submit Application — $${p.appFee} App Fee</button>
+        <p class="form-note">App fee is collected after initial review. We'll contact you to proceed. All info kept confidential.</p>
+      </div>
+      <div id="apply-success-${p.id}" class="form-success">
+        ✓ Application Submitted!<br/>
+        <span style="font-size:13px;color:#888;font-weight:300;text-transform:none;letter-spacing:0;margin-top:8px;display:block;line-height:1.6;">We received your application for ${p.address}. Expect a response within 24–48 hours. Check your email for confirmation.</span>
+      </div>
+    </div>` : `
+    <div class="apply-form">
+      <p style="font-family:var(--font-cond);font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--grey);text-align:center;padding:16px 0;">This unit is currently rented. <a href="#" onclick="closeModal();openWaitlist();return false;" style="color:var(--gold);text-decoration:none;">Join the waitlist →</a></p>
+    </div>`}
+  `;
+  document.getElementById('detail-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  if (jumpToApply) {
+    setTimeout(() => {
+      const s = document.getElementById('apply-section');
+      if (s) s.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  }
+}
+
+function closeModal() {
+  document.getElementById('detail-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeModalOutside(e) {
+  if (e.target.id === 'detail-modal') closeModal();
+}
+function submitApplication(addr) {
+  document.getElementById('apply-form-inner').style.display = 'none';
+  const suc = document.querySelector('[id^="apply-success-"]');
+  if (suc) { suc.style.display = 'block'; }
+}
+
+// ─── WAITLIST ─────────────────────────────────────────────────────
+function openWaitlist() {
+  document.getElementById('waitlist-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeWaitlist() {
+  document.getElementById('waitlist-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeWaitlistOutside(e) {
+  if (e.target.id === 'waitlist-modal') closeWaitlist();
+}
+function submitWaitlist() {
+  document.querySelector('#waitlist-modal .apply-form .form-grid').style.display = 'none';
+  document.querySelector('#waitlist-modal .form-submit').style.display = 'none';
+  document.querySelector('#waitlist-modal .form-note').style.display = 'none';
+  document.getElementById('waitlist-success').style.display = 'block';
+}
+
+// ─── FAQ ─────────────────────────────────────────────────────────
+function toggleFaq(btn) {
+  const a = btn.nextElementSibling;
+  const isOpen = a.classList.contains('open');
+  document.querySelectorAll('.faq-a').forEach(el => el.classList.remove('open'));
+  document.querySelectorAll('.faq-q').forEach(el => el.classList.remove('open'));
+  if (!isOpen) { a.classList.add('open'); btn.classList.add('open'); }
+}
+
+// ─── SCROLL ANIMATIONS ───────────────────────────────────────────
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 70);
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+
+// ─── INIT ─────────────────────────────────────────────────────────
+render();
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
