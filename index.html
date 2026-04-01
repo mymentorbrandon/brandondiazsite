@@ -741,6 +741,7 @@
     #scripture-banner::before { display: none; }
     .email-form { flex-direction: column; }
     .email-input { border-right: 1px solid var(--border); border-bottom: none; }
+    .course-vid-grid { grid-template-columns: 1fr !important; }
   }
 </style>
 </head>
@@ -998,45 +999,89 @@
 <section id="courses">
   <div class="section-label">Learn From Me</div>
   <h2 class="section-title">THE <span class="gold">VAULT</span></h2>
-  <p class="section-desc">Courses built from real experience in the field — not theory. Some are free, some are premium, all are worth your time.</p>
-  <div class="courses-grid">
-    <div class="course-card fade-up">
-      <div class="course-thumb">🏠</div>
-      <div class="course-body">
-        <div class="course-level">Beginner · Free</div>
-        <h3 class="course-title">REI Foundations</h3>
-        <p class="course-desc">Everything you need to understand before buying your first property. Market analysis, financing basics, and deal structure.</p>
-        <div class="course-meta">
-          <span class="course-price">FREE</span>
-          <button class="course-btn">Enroll Now</button>
+  <p class="section-desc">Built from 16 years and 350+ deals in the field. These are the exact strategies, documents, and systems I've used to close hundreds of wholesale transactions. No fluff — just real knowledge.</p>
+
+  <!-- COURSE 1 -->
+  <div style="background:var(--card);border:1px solid var(--border);margin-bottom:40px;position:relative;">
+    <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--red));"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;">
+      <!-- LEFT: Video -->
+      <div style="position:relative;background:#000;">
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;">
+          <iframe src="https://www.youtube.com/embed/smUYP5QQoPM" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allowfullscreen></iframe>
         </div>
       </div>
-    </div>
-    <div class="course-card fade-up">
-      <div class="course-thumb">🔑</div>
-      <div class="course-body">
-        <div class="course-level">Intermediate · Paid</div>
-        <h3 class="course-title">Landlord Blueprint</h3>
-        <p class="course-desc">My full system for managing tenants, handling repairs, setting rents, and protecting your investment long-term.</p>
-        <div class="course-meta">
-          <span class="course-price">$197</span>
-          <button class="course-btn">Get Access</button>
+      <!-- RIGHT: Info -->
+      <div style="padding:36px;">
+        <div style="font-family:var(--font-cond);font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;">Course 01 · Free · Wholesaling</div>
+        <h3 style="font-family:var(--font-display);font-size:32px;line-height:1;margin-bottom:14px;">THE DOUBLE CLOSE<br/><span style="color:var(--gold)">BLUEPRINT</span></h3>
+        <p style="font-size:13px;font-style:italic;color:var(--gold);font-weight:300;margin-bottom:14px;">"Wholesaling from Contract to Cash"</p>
+        <p style="font-size:13px;font-weight:300;color:#aaa;line-height:1.8;margin-bottom:20px;">This is a complete step-by-step walkthrough of how to execute a wholesale real estate transaction using a <strong style="color:var(--white)">double close and assignment of contract at closing</strong>. I walk you through the entire process from finding a deal, getting it under contract, identifying your end buyer, and collecting your wholesale fee at the closing table — without ever using your own money. This video is designed to be followed alongside the PDF booklet, page by page, so you have both the visual instruction and the written reference in front of you at the same time. Whether you're doing your first deal or you want to sharpen your process, this is the foundation.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;">
+          <span style="font-family:var(--font-cond);font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border:1px solid rgba(201,168,76,.3);color:rgba(201,168,76,.8);">Double Close</span>
+          <span style="font-family:var(--font-cond);font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border:1px solid var(--border);color:var(--grey);">Assignment of Contract</span>
+          <span style="font-family:var(--font-cond);font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border:1px solid var(--border);color:var(--grey);">Step-by-Step</span>
+          <span style="font-family:var(--font-cond);font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border:1px solid var(--border);color:var(--grey);">No Money Needed</span>
         </div>
-      </div>
-    </div>
-    <div class="course-card fade-up">
-      <div class="course-thumb">📈</div>
-      <div class="course-body">
-        <div class="course-level">Advanced · Paid</div>
-        <h3 class="course-title">Scale to 10 Doors</h3>
-        <p class="course-desc">The exact roadmap I used to grow from 1 to 10+ doors — creative financing, portfolio management, and team building.</p>
-        <div class="course-meta">
-          <span class="course-price">$497</span>
-          <button class="course-btn">Get Access</button>
+        <div style="padding:16px;background:rgba(201,168,76,.06);border-left:3px solid var(--gold);margin-bottom:24px;">
+          <div style="font-family:var(--font-cond);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">📄 Course Booklet Included</div>
+          <p style="font-size:12px;font-weight:300;color:#aaa;line-height:1.6;margin-bottom:10px;">Follow along page by page with the full PDF booklet. Every step in the video maps directly to a page in the guide — so you can pause, read, and absorb at your own pace.</p>
+          <a href="https://drive.google.com/drive/folders/1g4Fg-ZZfhzALhKzhr045-9VJi5oqBWTf?usp=drive_link" target="_blank" style="font-family:var(--font-cond);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);text-decoration:none;">Download PDF Booklet →</a>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <span style="font-family:var(--font-display);font-size:32px;color:var(--gold);">FREE</span>
+          <a href="https://youtu.be/smUYP5QQoPM" target="_blank" style="font-family:var(--font-cond);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:var(--gold);color:var(--black);padding:12px 24px;text-decoration:none;">Watch Now →</a>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- COURSE 2 -->
+  <div style="background:var(--card);border:1px solid var(--border);margin-bottom:40px;position:relative;">
+    <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--red));"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;">
+      <!-- LEFT: Video -->
+      <div style="position:relative;background:#000;">
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;">
+          <iframe src="https://www.youtube.com/embed/VTzFXmhLI9A" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allowfullscreen></iframe>
+        </div>
+      </div>
+      <!-- RIGHT: Info -->
+      <div style="padding:36px;">
+        <div style="font-family:var(--font-cond);font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;">Course 02 · Free · Companion to Course 01</div>
+        <h3 style="font-family:var(--font-display);font-size:32px;line-height:1;margin-bottom:14px;">THE PAPER TRAIL<br/><span style="color:var(--gold)">DECODED</span></h3>
+        <p style="font-size:13px;font-style:italic;color:var(--gold);font-weight:300;margin-bottom:14px;">"Understanding Wholesale Contracts & Closing Docs"</p>
+        <p style="font-size:13px;font-weight:300;color:#aaa;line-height:1.8;margin-bottom:20px;">Most investors lose deals — or get burned — because they don't understand the paperwork. This course breaks down every document you'll encounter in a wholesale transaction. I go through each contract, addendum, and closing document one by one, explaining <strong style="color:var(--white)">what it means, why it matters, and how to use it correctly</strong> to protect yourself and close with confidence. This is the companion course to The Double Close Blueprint — designed to be used together. Watch Course 01 to understand the process, then use this course to master the paperwork behind every step. The included document packet gives you real examples to reference on every deal you do.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;">
+          <span style="font-family:var(--font-cond);font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border:1px solid rgba(201,168,76,.3);color:rgba(201,168,76,.8);">Purchase Agreement</span>
+          <span style="font-family:var(--font-cond);font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border:1px solid var(--border);color:var(--grey);">Assignment Contract</span>
+          <span style="font-family:var(--font-cond);font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border:1px solid var(--border);color:var(--grey);">Closing Docs</span>
+          <span style="font-family:var(--font-cond);font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border:1px solid var(--border);color:var(--grey);">Legal Protection</span>
+        </div>
+        <div style="padding:16px;background:rgba(201,168,76,.06);border-left:3px solid var(--gold);margin-bottom:24px;">
+          <div style="font-family:var(--font-cond);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">📄 Document Packet Included</div>
+          <p style="font-size:12px;font-weight:300;color:#aaa;line-height:1.6;margin-bottom:10px;">Get the full document packet referenced throughout this course. Real contracts and forms with explanations — so you know exactly what you're signing and what you're asking others to sign.</p>
+          <a href="https://drive.google.com/drive/folders/1KTDP_PB9c9_gZvFFQ2W12dj96JxNqncR?usp=drive_link" target="_blank" style="font-family:var(--font-cond);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);text-decoration:none;">Download Document Packet →</a>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <span style="font-family:var(--font-display);font-size:32px;color:var(--gold);">FREE</span>
+          <a href="https://youtu.be/VTzFXmhLI9A" target="_blank" style="font-family:var(--font-cond);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:var(--gold);color:var(--black);padding:12px 24px;text-decoration:none;">Watch Now →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BUNDLE CALLOUT -->
+  <div style="background:linear-gradient(135deg,rgba(201,168,76,.08),rgba(192,57,43,.04));border:1px solid var(--gold);padding:36px;text-align:center;">
+    <div style="font-family:var(--font-cond);font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">⭐ Best Used Together</div>
+    <h3 style="font-family:var(--font-display);font-size:32px;margin-bottom:10px;">THE WHOLESALE <span style="color:var(--gold)">BUNDLE</span></h3>
+    <p style="font-size:14px;font-weight:300;color:#aaa;max-width:560px;margin:0 auto 24px;line-height:1.7;">Watch Course 01 to learn the full double close process step by step. Then use Course 02 to understand every piece of paperwork behind it. Together these two courses give you everything you need to execute your first wholesale deal with confidence.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+      <a href="https://youtu.be/smUYP5QQoPM" target="_blank" style="font-family:var(--font-cond);font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:var(--gold);color:var(--black);padding:13px 28px;text-decoration:none;">Start Course 01 →</a>
+      <a href="https://youtu.be/VTzFXmhLI9A" target="_blank" style="font-family:var(--font-cond);font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:transparent;color:var(--white);border:1px solid var(--border);padding:13px 28px;text-decoration:none;">Start Course 02 →</a>
+    </div>
+  </div>
+
 </section>
 
 <!-- FAITH -->
